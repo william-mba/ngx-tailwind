@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, DestroyRef, inject, signal, ViewEncapsulation } from '@angular/core';
 import { TwButton, TwDropdown, TwIcon } from 'tailwind-ng';
-import { TwOption, ThemeService } from '@tailwind-ng/core';
+import { TwOption, ThemeService, ZIndexer } from '@tailwind-ng/core';
 import { DOCUMENT, NgIf } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { RouterLink, RouterLinkActive } from '@angular/router';
@@ -32,15 +32,17 @@ export class DocsComponent {
     }
   })
   private readonly _destroyRef = inject(DestroyRef);
-
+  private readonly _zIndex = inject(ZIndexer);
+  protected zIndex = this._zIndex.next;
   constructor() {
     this._resizeObserver.observe(this._document.body);
     this._destroyRef.onDestroy(() => this._resizeObserver.disconnect());
   }
 
   toggleNav() {
-    if(!this.isMobile) return;
+    if (!this.isMobile) return;
     this.navOpened.update(current => !current);
+    this.zIndex = this._zIndex.next;
   }
 
   releaseTag = {

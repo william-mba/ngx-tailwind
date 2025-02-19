@@ -1,6 +1,6 @@
 <div>
   <!-- Top bar -->
-  <div class="z-50 absolute inset-x-0 top-0 border-b border-gray-950/10 dark:border-white/10">
+  <div class="absolute inset-x-0 top-0 border-b border-gray-950/10 dark:border-white/10">
     <!-- Top bar on all screens -->
     <div class="bg-white dark:bg-black">
       <div class="flex h-14 items-center justify-between gap-8 px-4 sm:px-6">
@@ -123,7 +123,7 @@
     </div>
     <!-- Main content -->
     <div
-      class="sm:col-start-2 md:col-start-3 lg:col-start-4 col-span-full relative overflow-y-auto max-h-screen bg-white dark:bg-black transition-colors duration-200">
+      class="max-sm:z-10 sm:col-start-2 md:col-start-3 lg:col-start-4 col-span-full relative overflow-y-auto max-h-screen bg-white dark:bg-black transition-colors duration-200">
       <router-outlet />
     </div>
   </div>
