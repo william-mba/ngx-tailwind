@@ -8,11 +8,12 @@ import { ZIndexer } from '../injectables/z-index.service';
     '[attr.id]': 'id',
     '[attr.open]': 'opened() || null',
     '[attr.aria-expanded]': 'opened()',
-    '[style.zIndex]': 'zIndex',
+    '[style.z-index]': 'zIndex',
   }
 })
 export abstract class PopupDirective<T extends HTMLElement = HTMLElement> extends BaseDirective<T> implements Popup<T> {
-  @Input() zIndex = inject(ZIndexer).next;
+  private readonly _zIndex = inject(ZIndexer);
+  protected zIndex = this._zIndex.next;
   @Input() id = this.randomId('popup');
   @Input() options?: PopupExtraOptons;
   opened = model(false);
@@ -28,6 +29,7 @@ export abstract class PopupDirective<T extends HTMLElement = HTMLElement> extend
   open(): void {
     if (!this.opened()) {
       this.opened.set(true);
+      this.zIndex = this._zIndex.next;
     }
   }
 

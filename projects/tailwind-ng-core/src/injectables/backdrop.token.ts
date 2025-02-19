@@ -1,20 +1,13 @@
-import { Directive, inject, Input } from "@angular/core";
+import { Directive, inject } from "@angular/core";
 import { ConfigTypeOf } from "../config";
 import { BaseDirective } from "../directives";
 import { InjectionTokenFactory } from "./injection-token.factory";
-import { ZIndexer } from "./z-index.service";
 
 export const BACKDROP_CONFIG = InjectionTokenFactory.create<ConfigTypeOf<'Backdrop'>>({}, 'DIALOG_CONFIG');
 
-@Directive({
-  host: {
-    '[style.zIndex]': 'zIndex',
-  }
-})
+@Directive({})
 export abstract class BackdropBase extends BaseDirective {
   protected config = inject(BACKDROP_CONFIG);
-  private _zIndexer = inject(ZIndexer);
-  @Input() zIndex = this._zIndexer.next;
 }
 
 /**
