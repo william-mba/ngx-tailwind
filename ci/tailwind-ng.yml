@@ -56,9 +56,6 @@ stages:
 
         - bash: |
             npm config set //registry.npmjs.org/:_authToken=$(authToken)
-            cd $(Build.SourcesDirectory)/projects/tailwind-ng-themes
-            npm version $(ReleaseVersion)
-            npm publish --tag $(ReleaseTag)
             cd $(Build.SourcesDirectory)/artifacts/tailwind-ng
             npm version $(ReleaseVersion)
             npm publish --tag $(ReleaseTag)
