@@ -665,9 +665,6 @@
   .top-12 {
     top: calc(var(--spacing) * 12);
   }
-  .top-28\.5 {
-    top: calc(var(--spacing) * 28.5);
-  }
   .top-\[484px\] {
     top: 484px;
   }
@@ -3215,9 +3212,6 @@
   .text-gray-900 {
     color: var(--color-gray-900);
   }
-  .text-gray-950 {
-    color: var(--color-gray-950);
-  }
   .text-green-500 {
     color: var(--color-green-500);
   }
@@ -3663,10 +3657,6 @@
     --tw-duration: 5ms;
     transition-duration: 5ms;
   }
-  .duration-25 {
-    --tw-duration: 25ms;
-    transition-duration: 25ms;
-  }
   .duration-50 {
     --tw-duration: 50ms;
     transition-duration: 50ms;
@@ -3679,13 +3669,17 @@
     --tw-duration: 100ms;
     transition-duration: 100ms;
   }
+  .duration-200 {
+    --tw-duration: 200ms;
+    transition-duration: 200ms;
+  }
+  .duration-25 {
+    --tw-duration: 25ms;
+    transition-duration: 25ms;
+  }
   .duration-300 {
     --tw-duration: 300ms;
     transition-duration: 300ms;
-  }
-  .duration-700 {
-    --tw-duration: 700ms;
-    transition-duration: 700ms;
   }
   .duration-1000 {
     --tw-duration: 1000ms;
@@ -3695,13 +3689,13 @@
     --tw-duration: 150ms;
     transition-duration: 150ms;
   }
-  .duration-200 {
-    --tw-duration: 200ms;
-    transition-duration: 200ms;
-  }
   .duration-500 {
     --tw-duration: 500ms;
     transition-duration: 500ms;
+  }
+  .duration-700 {
+    --tw-duration: 700ms;
+    transition-duration: 700ms;
   }
   .ease-in {
     --tw-ease: var(--ease-in);
@@ -4991,12 +4985,6 @@
       transition-duration: 300ms;
     }
   }
-  .has-data-\[opened\=false\]\:-translate-x-full {
-    &:has(*[data-opened="false"]) {
-      --tw-translate-x: -100%;
-      translate: var(--tw-translate-x) var(--tw-translate-y);
-    }
-  }
   .has-\[\:checked\]\:bg-blue-600 {
     &:has(*:is(:checked)) {
       background-color: var(--color-blue-600);
@@ -5143,12 +5131,6 @@
       }
     }
   }
-  .data-\[opened\=false\]\:-translate-x-full {
-    &[data-opened="false"] {
-      --tw-translate-x: -100%;
-      translate: var(--tw-translate-x) var(--tw-translate-y);
-    }
-  }
   .max-lg\:fixed {
     @media (width < 64rem) {
       position: fixed;
@@ -5201,14 +5183,24 @@
       display: none;
     }
   }
+  .max-sm\:absolute {
+    @media (width < 40rem) {
+      position: absolute;
+    }
+  }
+  .max-sm\:inset-0 {
+    @media (width < 40rem) {
+      inset: calc(var(--spacing) * 0);
+    }
+  }
   .max-sm\:left-4 {
     @media (width < 40rem) {
       left: calc(var(--spacing) * 4);
     }
   }
-  .max-sm\:hidden {
+  .max-sm\:z-50 {
     @media (width < 40rem) {
-      display: none;
+      z-index: 50;
     }
   }
   .max-sm\:size-4 {
@@ -5242,6 +5234,11 @@
   .max-sm\:gap-0\.5 {
     @media (width < 40rem) {
       gap: calc(var(--spacing) * 0.5);
+    }
+  }
+  .max-sm\:overflow-y-auto {
+    @media (width < 40rem) {
+      overflow-y: auto;
     }
   }
   .max-sm\:px-2 {
@@ -5282,10 +5279,24 @@
       text-wrap: nowrap;
     }
   }
+  .max-sm\:duration-200 {
+    @media (width < 40rem) {
+      --tw-duration: 200ms;
+      transition-duration: 200ms;
+    }
+  }
   .max-sm\:\*\:pl-0 {
     @media (width < 40rem) {
       :is(& > *) {
         padding-left: calc(var(--spacing) * 0);
+      }
+    }
+  }
+  .max-sm\:has-data-\[opened\=false\]\:-translate-x-full {
+    @media (width < 40rem) {
+      &:has(*[data-opened="false"]) {
+        --tw-translate-x: -100%;
+        translate: var(--tw-translate-x) var(--tw-translate-y);
       }
     }
   }
@@ -5322,11 +5333,6 @@
   .sm\:grid {
     @media (width >= 40rem) {
       display: grid;
-    }
-  }
-  .sm\:hidden {
-    @media (width >= 40rem) {
-      display: none;
     }
   }
   .sm\:inline-block {
@@ -5564,19 +5570,13 @@
       }
     }
   }
-  .has-data-\[opened\=false\]\:sm\:translate-x-0 {
-    &:has(*[data-opened="false"]) {
-      @media (width >= 40rem) {
-        --tw-translate-x: calc(var(--spacing) * 0);
-        translate: var(--tw-translate-x) var(--tw-translate-y);
-      }
-    }
-  }
-  .data-\[opened\=false\]\:sm\:translate-x-0 {
-    &[data-opened="false"] {
-      @media (width >= 40rem) {
-        --tw-translate-x: calc(var(--spacing) * 0);
-        translate: var(--tw-translate-x) var(--tw-translate-y);
+  .max-sm\:has-data-\[opened\=false\]\:sm\:translate-x-0 {
+    @media (width < 40rem) {
+      &:has(*[data-opened="false"]) {
+        @media (width >= 40rem) {
+          --tw-translate-x: calc(var(--spacing) * 0);
+          translate: var(--tw-translate-x) var(--tw-translate-y);
+        }
       }
     }
   }
