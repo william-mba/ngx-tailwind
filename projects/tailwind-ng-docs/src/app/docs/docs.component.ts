@@ -1,7 +1,7 @@
-import { ChangeDetectionStrategy, Component, inject, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, inject, signal, ViewEncapsulation } from '@angular/core';
 import { TwButton, TwDropdown, TwIcon } from 'tailwind-ng';
 import { TwOption, ThemeService } from '@tailwind-ng/core';
-import { NgIf } from '@angular/common';
+import { DOCUMENT, NgIf } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 
@@ -13,9 +13,34 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DocsComponent {
-  isNavOpened = false;
+  navOpened = signal(false);
+  private maxSm = 640;
+  private isMobile = false;
+  private _document = inject(DOCUMENT);
+  private readonly _resizeObserver = new ResizeObserver((entries) => {
+    for (const entry of entries) {
+      let width;
+      if (entry.contentBoxSize[0]) {
+        width = entry.contentBoxSize[0].inlineSize;
+        this.isMobile = width <= this.maxSm;
+        break;
+      } else {
+        width = entry.contentRect.width;
+        this.isMobile = width <= this.maxSm;
+        break;
+      }
+    }
+  })
+  private readonly _destroyRef = inject(DestroyRef);
+
+  constructor() {
+    this._resizeObserver.observe(this._document.body);
+    this._destroyRef.onDestroy(() => this._resizeObserver.disconnect());
+  }
+
   toggleNav() {
-    this.isNavOpened = !this.isNavOpened;
+    if(!this.isMobile) return;
+    this.navOpened.update(current => !current);
   }
 
   releaseTag = {

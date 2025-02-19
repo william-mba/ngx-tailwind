@@ -5198,11 +5198,6 @@
       left: calc(var(--spacing) * 4);
     }
   }
-  .max-sm\:z-50 {
-    @media (width < 40rem) {
-      z-index: 50;
-    }
-  }
   .max-sm\:size-4 {
     @media (width < 40rem) {
       width: calc(var(--spacing) * 4);
@@ -5234,11 +5229,6 @@
   .max-sm\:gap-0\.5 {
     @media (width < 40rem) {
       gap: calc(var(--spacing) * 0.5);
-    }
-  }
-  .max-sm\:overflow-y-auto {
-    @media (width < 40rem) {
-      overflow-y: auto;
     }
   }
   .max-sm\:px-2 {
@@ -5279,12 +5269,6 @@
       text-wrap: nowrap;
     }
   }
-  .max-sm\:duration-200 {
-    @media (width < 40rem) {
-      --tw-duration: 200ms;
-      transition-duration: 200ms;
-    }
-  }
   .max-sm\:\*\:pl-0 {
     @media (width < 40rem) {
       :is(& > *) {
@@ -5292,9 +5276,9 @@
       }
     }
   }
-  .max-sm\:has-data-\[opened\=false\]\:-translate-x-full {
+  .max-sm\:not-open\:-translate-x-full {
     @media (width < 40rem) {
-      &:has(*[data-opened="false"]) {
+      &:not([open], :popover-open, :open) {
         --tw-translate-x: -100%;
         translate: var(--tw-translate-x) var(--tw-translate-y);
       }
@@ -5566,16 +5550,6 @@
       :is(& > *) {
         @media (width >= 40rem) {
           display: table-cell;
-        }
-      }
-    }
-  }
-  .max-sm\:has-data-\[opened\=false\]\:sm\:translate-x-0 {
-    @media (width < 40rem) {
-      &:has(*[data-opened="false"]) {
-        @media (width >= 40rem) {
-          --tw-translate-x: calc(var(--spacing) * 0);
-          translate: var(--tw-translate-x) var(--tw-translate-y);
         }
       }
     }
