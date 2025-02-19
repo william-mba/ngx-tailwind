@@ -13,27 +13,29 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DocsComponent {
-  navOpened = signal(false);
+  navOpened = signal(true);
   private maxSm = 640;
   private isMobile = false;
   private _document = inject(DOCUMENT);
   private readonly _resizeObserver = new ResizeObserver((entries) => {
-    for (const entry of entries) {
-      let width;
-      if (entry.contentBoxSize[0]) {
-        width = entry.contentBoxSize[0].inlineSize;
+    requestAnimationFrame(() => {
+      for (const entry of entries) {
+        let width;
+        if (entry.contentBoxSize[0]) {
+          width = entry.contentBoxSize[0].inlineSize;
+        } else {
+          width = entry.contentRect.width;
+        }
         this.isMobile = width <= this.maxSm;
-        break;
-      } else {
-        width = entry.contentRect.width;
-        this.isMobile = width <= this.maxSm;
-        break;
+        if (this.isMobile) {
+          this.navOpened.set(false);
+        } else {
+          this.navOpened.set(true);
+        }
       }
-    }
+    });
   })
   private readonly _destroyRef = inject(DestroyRef);
-  private readonly _zIndex = inject(ZIndexer);
-  protected zIndex = this._zIndex.next;
   constructor() {
     this._resizeObserver.observe(this._document.body);
     this._destroyRef.onDestroy(() => this._resizeObserver.disconnect());
@@ -42,7 +44,6 @@ export class DocsComponent {
   toggleNav() {
     if (!this.isMobile) return;
     this.navOpened.update(current => !current);
-    this.zIndex = this._zIndex.next;
   }
 
   releaseTag = {
