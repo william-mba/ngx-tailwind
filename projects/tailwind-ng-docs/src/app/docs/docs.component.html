@@ -74,8 +74,8 @@
   <div
     class="z-50 absolute inset-0 mt-28.5 md:mt-14.25 grid grid-cols-1 sm:grid-cols-3 md:grid-cols-7 lg:grid-cols-16 grid-rows-1">
     <!-- Left navigation -->
-    <div [attr.open]="navOpened()||null"
-      class="z-50 max-sm:absolute max-sm:inset-0 max-sm:not-open:-translate-x-full duration-200 col-start-1 sm:col-end-2 md:col-end-3 lg:col-end-4 overflow-y-auto max-h-screen">
+    <div [attr.data-open]="navOpened()"
+      class="z-50 max-sm:absolute max-sm:inset-0 max-sm:data-[open=false]:-translate-x-full duration-200 col-start-1 sm:col-end-2 md:col-end-3 lg:col-end-4 overflow-y-auto max-h-screen">
       <div
         class="min-h-screen bg-white dark:bg-black font-medium *:mb-6 text-gray-600 dark:text-gray-400 border-r px-6 pr-4 py-8 border-gray-950/10 dark:border-white/10 relative">
         @for (item of navItems; track $index) {
