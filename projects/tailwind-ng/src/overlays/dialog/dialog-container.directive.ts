@@ -14,7 +14,8 @@ import { DialogComponent } from "./dialog.component";
 export class DialogContainerDirective extends BaseDirective implements OnInit {
   private readonly dialog = inject(DialogComponent, { skipSelf: true, host: true });
   protected config = inject(DIALOG_CONFIG).container;
-   @Input() zIndex = inject(ZIndexer).next;
+  private _zIndexer = inject(ZIndexer);
+  @Input() zIndex = this._zIndexer.next;
 
   protected override buildStyle(): void {
     this.classList = classlist(this.class()).set(this.config!);
@@ -23,12 +24,15 @@ export class DialogContainerDirective extends BaseDirective implements OnInit {
   override ngOnInit(): void {
     super.ngOnInit();
     this.dialog.opened.subscribe(() => {
-      if (this.dialog.autoFocus) {
-        this.focusPrimaryAction();
-      }
-      if (this.dialog.autoClose) {
-        this.dialog.closeAfter(this.dialog.displayDelay);
-      }
+      requestAnimationFrame(() => {
+        this.zIndex = this._zIndexer.next;
+        if (this.dialog.autoFocus) {
+          this.focusPrimaryAction();
+        }
+        if (this.dialog.autoClose) {
+          this.dialog.closeAfter(this.dialog.displayDelay);
+        }
+      });
     });
     if (this.dialog.autoClose && this.dialog.opened()) {
       this.dialog.closeAfter(this.dialog.displayDelay);

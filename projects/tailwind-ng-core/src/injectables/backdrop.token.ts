@@ -2,7 +2,7 @@ import { Directive, inject, Input } from "@angular/core";
 import { ConfigTypeOf } from "../config";
 import { BaseDirective } from "../directives";
 import { InjectionTokenFactory } from "./injection-token.factory";
-import { Z_INDEX_SEED } from "./z-index.service";
+import { ZIndexer } from "./z-index.service";
 
 export const BACKDROP_CONFIG = InjectionTokenFactory.create<ConfigTypeOf<'Backdrop'>>({}, 'DIALOG_CONFIG');
 
@@ -13,7 +13,8 @@ export const BACKDROP_CONFIG = InjectionTokenFactory.create<ConfigTypeOf<'Backdr
 })
 export abstract class BackdropBase extends BaseDirective {
   protected config = inject(BACKDROP_CONFIG);
-  @Input() zIndex = inject(Z_INDEX_SEED);
+  private _zIndexer = inject(ZIndexer);
+  @Input() zIndex = this._zIndexer.next;
 }
 
 /**

@@ -1,6 +1,6 @@
-import { ChangeDetectionStrategy, Component, DestroyRef, inject, signal, ViewEncapsulation } from '@angular/core';
+import { Component, DestroyRef, inject, signal } from '@angular/core';
 import { TwButton, TwDropdown, TwIcon } from 'tailwind-ng';
-import { TwOption, ThemeService, ZIndexer } from '@tailwind-ng/core';
+import { TwOption, ThemeService } from '@tailwind-ng/core';
 import { DOCUMENT, NgIf } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { RouterLink, RouterLinkActive } from '@angular/router';
@@ -8,9 +8,7 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 @Component({
   selector: 'app-docs',
   imports: [NgIf, RouterLink, RouterLinkActive, TwIcon, TwDropdown, TwButton, TwOption, RouterOutlet],
-  templateUrl: './docs.component.html',
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  templateUrl: './docs.component.html'
 })
 export class DocsComponent {
   navOpened = signal(true);
@@ -42,22 +40,9 @@ export class DocsComponent {
   }
 
   toggleNav() {
-    if (!this.isMobile) return;
     this.navOpened.update(current => !current);
   }
 
-  releaseTag = {
-    active: 'latest',
-    options: [
-      { value: 'latest', label: 'Latest' },
-      { value: 'next', label: 'Next' },
-      { value: 'dev', label: 'Dev' },
-    ]
-  };
-
-  updateTag(value: string) {
-    this.releaseTag.active = value;
-  }
   protected readonly theme = inject(ThemeService);
   switchTheme() {
     this.theme.toggle();
